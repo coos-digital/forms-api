@@ -1,0 +1,16 @@
+# Nixpacks configuration for Forms API (Bun + Hono + React Email)
+
+[phases.setup]
+nixPkgs = ["bun"]
+
+[phases.install]
+cmds = ["bun install --frozen-lockfile"]
+
+[phases.build]
+cmds = ["echo 'No build step required'"]
+
+[start]
+cmd = "bun run src/index.ts"
+
+[variables]
+NODE_ENV = "production"
