@@ -1,5 +1,5 @@
 import { Hono } from 'hono'
-import { handleLogistica } from './handler'
+import { handleLogistica } from './handler.tsx'
 
 const logistica = new Hono()
 

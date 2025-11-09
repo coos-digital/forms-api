@@ -1,3 +1,5 @@
+/** @jsx React.createElement */
+import React from 'react'
 import { render } from '@react-email/components'
 import { Resend } from 'resend'
 import type { Context } from 'hono'

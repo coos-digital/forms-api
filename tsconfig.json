@@ -4,8 +4,9 @@
     "module": "ESNext",
     "lib": ["ESNext"],
     "moduleResolution": "bundler",
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
+    "jsxFragmentFactory": "React.Fragment",
     "strict": true,
     "skipLibCheck": true,
     "types": ["bun-types"]
