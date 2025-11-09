@@ -105,6 +105,42 @@ Veja o guia completo em [ARCHITECTURE.md](./ARCHITECTURE.md#-como-adicionar-um-n
 
 - [Arquitetura](./ARCHITECTURE.md) - Estrutura e padrões do projeto
 - [Integração Frontend](./INTEGRATION.md) - Como integrar com React
+- **[Client Utility](./client/README.md) - Função pronta para copiar e usar** ⭐
+
+## 🎯 Uso no Frontend
+
+### Copie a função utilitária
+
+```bash
+# TypeScript
+curl -o src/lib/submitForm.ts https://raw.githubusercontent.com/coos-digital/forms-api/master/client/submitForm.ts
+
+# JavaScript
+curl -o src/lib/submitForm.js https://raw.githubusercontent.com/coos-digital/forms-api/master/client/submitForm.js
+```
+
+### Use no seu projeto
+
+```typescript
+import { submitForm } from '@/lib/submitForm'
+
+// Configure a URL da API no .env
+// VITE_FORMS_API_URL=https://forms-api.coosdigital.com.br
+
+const result = await submitForm('logistica', {
+  nome: 'João Silva',
+  email: 'joao@example.com',
+  mensagem: 'Gostaria de mais informações'
+})
+
+if (result.success) {
+  console.log('Enviado!', result.id)
+}
+```
+
+Veja mais exemplos em [client/README.md](./client/README.md)
+
+## 📚 Documentação
 
 ## 📝 Licença
 
