@@ -10,6 +10,7 @@
  * 4. Registre em forms/index.ts
  */
 
+import React from 'react'
 import {
   Html,
   Head,
