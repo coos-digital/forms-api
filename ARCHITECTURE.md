@@ -89,6 +89,7 @@ import { MeuFormEmail } from './template'
 import { formsConfig } from '../config'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
+const FROM_EMAIL = process.env.FROM_EMAIL || 'forms@example.com'
 
 export async function handleMeuForm(c: Context) {
   const body = await c.req.json()
@@ -97,7 +98,7 @@ export async function handleMeuForm(c: Context) {
   const emailHtml = await render(<MeuFormEmail data={body} />)
 
   const { data, error } = await resend.emails.send({
-    from: 'forms@coosdigital.com.br',
+    from: FROM_EMAIL,
     to: config.toEmail,
     subject: config.subject,
     html: emailHtml,

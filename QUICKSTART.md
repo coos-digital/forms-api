@@ -24,6 +24,7 @@ Edite o `.env` e adicione sua chave do Resend:
 
 ```bash
 RESEND_API_KEY=re_sua_chave_aqui
+FROM_EMAIL=forms@coosdigital.com.br
 EMAIL_DEFAULT=contato@coosdigital.com.br
 
 # Opcional: emails específicos por formulário
@@ -80,11 +81,20 @@ Abra `src/forms/contato/handler.ts`:
 ```tsx
 import { ContatoEmail } from './template'
 
+const FROM_EMAIL = process.env.FROM_EMAIL || 'forms@example.com'
+
 export async function handleContato(c: Context) {
   const body = await c.req.json()
   const config = formsConfig.contato  // ← mude aqui
   
   const emailHtml = await render(<ContatoEmail data={body} />)
+  
+  const { data, error } = await resend.emails.send({
+    from: FROM_EMAIL,
+    to: config.toEmail,
+    subject: config.subject,
+    html: emailHtml,
+  })
   
   // ... resto do código
 }

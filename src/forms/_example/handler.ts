@@ -1,10 +1,3 @@
-/**
- * EXEMPLO DE HANDLER
- * 
- * Este arquivo processa a requisição e envia o email.
- * Customize conforme necessário.
- */
-
 import { render } from '@react-email/components'
 import { Resend } from 'resend'
 import type { Context } from 'hono'
@@ -12,6 +5,7 @@ import { ExampleEmail } from './template'
 import { formsConfig } from '../config'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
+const FROM_EMAIL = process.env.FROM_EMAIL || 'forms@example.com'
 
 export async function handleExample(c: Context) {
   try {
@@ -31,7 +25,7 @@ export async function handleExample(c: Context) {
     const emailHtml = await render(<ExampleEmail data={body} />)
 
     const { data, error } = await resend.emails.send({
-      from: 'forms@coosdigital.com.br',
+      from: FROM_EMAIL,
       to: config.toEmail,
       subject: config.subject,
       html: emailHtml,
