@@ -24,8 +24,13 @@ Edite o `.env` e adicione sua chave do Resend:
 
 ```bash
 RESEND_API_KEY=re_sua_chave_aqui
-EMAIL_LOGISTICA=seu-email@example.com
+EMAIL_DEFAULT=contato@coosdigital.com.br
+
+# Opcional: emails específicos por formulário
+# EMAIL_LOGISTICA=logistica@coosdigital.com.br
 ```
+
+**Dica:** Configure apenas `EMAIL_DEFAULT` e todos os forms usarão esse email. Só adicione emails específicos se precisar!
 
 ### 4. Rodar o servidor
 
@@ -133,11 +138,13 @@ export default forms
 
 ### Passo 7: Adicionar variável de ambiente
 
-Adicione no `.env`:
+Adicione no `.env` (opcional - só se quiser email específico):
 
 ```bash
 EMAIL_CONTATO=contato@seusite.com
 ```
+
+**Nota:** Se não adicionar, usará o `EMAIL_DEFAULT` configurado anteriormente.
 
 ### Passo 8: Testar!
 

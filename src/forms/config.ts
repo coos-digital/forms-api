@@ -1,10 +1,12 @@
 import type { FormConfig } from '../types'
 
+const DEFAULT_EMAIL = process.env.EMAIL_DEFAULT || 'contato@example.com'
+
 export const formsConfig: Record<string, FormConfig> = {
   logistica: {
     id: 'logistica',
     name: 'Logística',
-    toEmail: process.env.EMAIL_LOGISTICA || 'contato@example.com',
+    toEmail: process.env.EMAIL_LOGISTICA || DEFAULT_EMAIL,
     subject: 'Novo contato - Logística',
   },
   
@@ -12,7 +14,7 @@ export const formsConfig: Record<string, FormConfig> = {
   // example: {
   //   id: 'example',
   //   name: 'Example Form',
-  //   toEmail: process.env.EMAIL_EXAMPLE || 'contato@example.com',
+  //   toEmail: process.env.EMAIL_EXAMPLE || DEFAULT_EMAIL,
   //   subject: 'Novo contato - Example',
   // },
 }

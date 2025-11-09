@@ -23,6 +23,11 @@ export async function handleExample(c: Context) {
     }
 
     const config = formsConfig.example
+    
+    // Se não tiver config, usa email padrão
+    if (!config) {
+      return c.json({ error: 'Formulário não configurado' }, 404)
+    }
     const emailHtml = await render(<ExampleEmail data={body} />)
 
     const { data, error } = await resend.emails.send({

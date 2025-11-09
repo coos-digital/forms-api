@@ -28,8 +28,9 @@ cp .env.example .env
 
 2. Configure suas variáveis de ambiente:
 - `RESEND_API_KEY`: Sua chave da API Resend
-- `EMAIL_LOGISTICA`: Email de destino para a landing page de logística
-- Adicione mais emails conforme necessário
+- `EMAIL_DEFAULT`: Email padrão para todos os formulários
+- `EMAIL_LOGISTICA`: (Opcional) Email específico para logística
+- Adicione mais emails específicos conforme necessário
 
 ## 🏃 Executar
 

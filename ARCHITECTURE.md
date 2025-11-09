@@ -127,12 +127,14 @@ export default meuForm
 ### Passo 5: Adicionar configuração (`src/forms/config.ts`)
 
 ```typescript
+const DEFAULT_EMAIL = process.env.EMAIL_DEFAULT || 'contato@example.com'
+
 export const formsConfig: Record<string, FormConfig> = {
   // ... outros forms
   meuForm: {
     id: 'meu-form',
     name: 'Meu Form',
-    toEmail: process.env.EMAIL_MEU_FORM || 'contato@example.com',
+    toEmail: process.env.EMAIL_MEU_FORM || DEFAULT_EMAIL, // ← Usa padrão se não especificado
     subject: 'Novo contato - Meu Form',
   },
 }
@@ -154,8 +156,12 @@ export default forms
 ### Passo 7: Adicionar variável de ambiente (`.env`)
 
 ```bash
+# Opcional: apenas se quiser email específico
+# Se não adicionar, usará o EMAIL_DEFAULT
 EMAIL_MEU_FORM=destino@example.com
 ```
+
+**Dica:** Se todos os forms vão para o mesmo email, basta configurar `EMAIL_DEFAULT` e não precisa adicionar variáveis específicas!
 
 ## 🎨 Customizando Templates
 
