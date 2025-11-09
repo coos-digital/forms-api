@@ -1,15 +1,7 @@
 import React from 'react'
-import {
-  Html,
-  Head,
-  Body,
-  Container,
-  Heading,
-  Text,
-  Hr,
-  Section,
-} from '@react-email/components'
+import { Text, Section } from '@react-email/components'
 import type { FormData } from '../../types'
+import { BaseEmailTemplate } from '../shared/BaseEmailTemplate'
 
 interface LogisticaEmailProps {
   data: FormData
@@ -17,69 +9,52 @@ interface LogisticaEmailProps {
 
 export function LogisticaEmail({ data }: LogisticaEmailProps) {
   return (
-    <Html lang="pt-BR">
-      <Head />
-      <Body style={styles.body}>
-        <Container style={styles.container}>
-          <Heading style={styles.heading}>Novo Contato - Logística</Heading>
-          
-          <Hr style={styles.hr} />
-          
-          <Section>
-            {Object.entries(data).map(([key, value]) => (
-              <Text key={key} style={styles.field}>
-                <strong style={styles.label}>{key}:</strong> {value}
-              </Text>
-            ))}
-          </Section>
-          
-          <Hr style={styles.hr} />
-          
-          <Text style={styles.footer}>
-            Enviado via Forms API - Coos Digital
+    <BaseEmailTemplate title="Novo Contato - Logística">
+      <Section>
+        {Object.entries(data).map(([key, value]) => (
+          <Text key={key} style={styles.field}>
+            <span style={styles.label}>{formatLabel(key)}:</span>{' '}
+            <span style={styles.value}>{value}</span>
           </Text>
-        </Container>
-      </Body>
-    </Html>
+        ))}
+      </Section>
+    </BaseEmailTemplate>
   )
 }
 
+function formatLabel(key: string): string {
+  const labels: Record<string, string> = {
+    nome: 'Nome',
+    email: 'Email',
+    telefone: 'Telefone',
+    empresa: 'Empresa',
+    cargo: 'Cargo',
+    necessidade: 'Necessidade',
+    volumeMensal: 'Volume Mensal',
+    mensagem: 'Mensagem',
+    aceitaContato: 'Aceita Contato',
+  }
+  return labels[key] || key.charAt(0).toUpperCase() + key.slice(1)
+}
+
 const styles = {
-  body: {
-    backgroundColor: '#f6f9fc',
-    fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
-  },
-  container: {
-    backgroundColor: '#ffffff',
-    margin: '0 auto',
-    padding: '20px 0 48px',
-    marginBottom: '64px',
-  },
-  heading: {
-    fontSize: '24px',
-    letterSpacing: '-0.5px',
-    lineHeight: '1.3',
-    fontWeight: '400',
-    color: '#484848',
-    padding: '17px 0 0',
-  },
-  hr: {
-    borderColor: '#dfe1e4',
-    margin: '24px 0',
-  },
   field: {
-    fontSize: '14px',
+    fontSize: '15px',
     lineHeight: '24px',
-    color: '#484848',
-    margin: '8px 0',
+    color: '#1a1a1a',
+    margin: '12px 0',
+    padding: '12px',
+    backgroundColor: '#f9f9f9',
+    borderRadius: '6px',
+    borderLeft: '3px solid #ff6b35',
   },
   label: {
-    color: '#000',
-    textTransform: 'capitalize' as const,
+    fontWeight: 'bold' as const,
+    color: '#1a1a1a',
+    display: 'inline-block',
+    minWidth: '140px',
   },
-  footer: {
-    color: '#8898aa',
-    fontSize: '12px',
-    lineHeight: '16px',
+  value: {
+    color: '#4a4a4a',
   },
 }
