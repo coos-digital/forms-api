@@ -1,11 +1,12 @@
 # Forms API - Coos Digital
 
-API centralizada para envio de formulários de landing pages via email usando Hono + Resend + Bun.
+API centralizada para envio de formulários de landing pages via email usando **Hono + Resend + React Email + Bun**.
 
 ## 🚀 Tecnologias
 
 - **Hono** - Framework web ultrafast
 - **Resend** - Serviço de envio de emails
+- **React Email** - Templates de email com React
 - **Bun** - Runtime JavaScript/TypeScript
 
 ## 📦 Instalação
@@ -41,7 +42,7 @@ bun start
 ### Endpoint
 
 ```
-POST /submit/:landingPage
+POST /submit/:formName
 ```
 
 ### Exemplo de requisição
@@ -66,21 +67,42 @@ curl -X POST http://localhost:3000/submit/logistica \
 }
 ```
 
-## 🔧 Adicionar nova landing page
+## 📁 Arquitetura
 
-1. Adicione a variável de ambiente no `.env`:
+Este projeto segue uma arquitetura modular onde cada formulário é um módulo independente.
+
+**Leia a documentação completa:** [ARCHITECTURE.md](./ARCHITECTURE.md)
+
 ```
-EMAIL_NOVA_LANDING=destino@example.com
+src/
+├── index.ts              # Entry point
+├── types.ts              # Tipos compartilhados
+└── forms/
+    ├── index.ts          # Agrupa rotas
+    ├── config.ts         # Configurações
+    └── logistica/        # Módulo do formulário
+        ├── route.ts      # Rota HTTP
+        ├── handler.ts    # Lógica
+        └── template.tsx  # Template React Email
 ```
 
-2. Adicione o mapeamento em `src/index.ts`:
-```typescript
-const emailMapping: Record<string, string> = {
-  logistica: process.env.EMAIL_LOGISTICA || 'contato@example.com',
-  novaLanding: process.env.EMAIL_NOVA_LANDING || 'contato@example.com',
-}
-```
+## 🔧 Adicionar novo formulário
+
+Veja o guia completo em [ARCHITECTURE.md](./ARCHITECTURE.md#-como-adicionar-um-novo-formulário)
+
+**Resumo:**
+1. Criar pasta `src/forms/meu-form/`
+2. Criar `template.tsx`, `handler.ts`, `route.ts`
+3. Adicionar config em `config.ts`
+4. Registrar rota em `forms/index.ts`
+5. Adicionar variável de ambiente
+
+## 📚 Documentação
+
+- [Arquitetura](./ARCHITECTURE.md) - Estrutura e padrões do projeto
+- [Integração Frontend](./INTEGRATION.md) - Como integrar com React
 
 ## 📝 Licença
 
 Coos Digital © 2025
+
