@@ -9,6 +9,10 @@ API centralizada para envio de formulários de landing pages via email usando **
 - **React Email** - Templates de email com React
 - **Bun** - Runtime JavaScript/TypeScript
 
+## ⚡ Quick Start
+
+**Novo por aqui?** Leia o [QUICKSTART.md](./QUICKSTART.md) para começar em 5 minutos!
+
 ## 📦 Instalação
 
 ```bash
