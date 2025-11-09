@@ -87,13 +87,11 @@ export async function handleContato(c: Context) {
   const body = await c.req.json()
   const config = formsConfig.contato  // ← mude aqui
   
-  const emailHtml = await render(<ContatoEmail data={body} />)
-  
   const { data, error } = await resend.emails.send({
     from: FROM_EMAIL,
     to: config.toEmail,
     subject: config.subject,
-    html: emailHtml,
+    react: <ContatoEmail data={body} />,
   })
   
   // ... resto do código

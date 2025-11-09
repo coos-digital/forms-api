@@ -1,5 +1,4 @@
 import React from 'react'
-import { render } from '@react-email/components'
 import { Resend } from 'resend'
 import type { Context } from 'hono'
 import { ExampleEmail } from './template'
@@ -23,13 +22,12 @@ export async function handleExample(c: Context) {
     if (!config) {
       return c.json({ error: 'Formulário não configurado' }, 404)
     }
-    const emailHtml = await render(<ExampleEmail data={body} />)
 
     const { data, error } = await resend.emails.send({
       from: FROM_EMAIL,
       to: config.toEmail,
       subject: config.subject,
-      html: emailHtml,
+      react: <ExampleEmail data={body} />,
       // Opcional: enviar cópia para o usuário
       // replyTo: body.email,
     })

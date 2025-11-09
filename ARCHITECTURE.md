@@ -82,7 +82,6 @@ export function MeuFormEmail({ data }: MeuFormEmailProps) {
 ### Passo 3: Criar o handler (`src/forms/meu-form/handler.ts`)
 
 ```typescript
-import { render } from '@react-email/components'
 import { Resend } from 'resend'
 import type { Context } from 'hono'
 import { MeuFormEmail } from './template'
@@ -95,13 +94,11 @@ export async function handleMeuForm(c: Context) {
   const body = await c.req.json()
   const config = formsConfig.meuForm
 
-  const emailHtml = await render(<MeuFormEmail data={body} />)
-
   const { data, error } = await resend.emails.send({
     from: FROM_EMAIL,
     to: config.toEmail,
     subject: config.subject,
-    html: emailHtml,
+    react: <MeuFormEmail data={body} />,
   })
 
   if (error) {

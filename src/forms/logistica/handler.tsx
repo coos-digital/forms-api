@@ -1,6 +1,5 @@
 /** @jsx React.createElement */
 import React from 'react'
-import { render } from '@react-email/components'
 import { Resend } from 'resend'
 import type { Context } from 'hono'
 import { LogisticaEmail } from './template'
@@ -13,13 +12,11 @@ export async function handleLogistica(c: Context) {
   const body = await c.req.json()
   const config = formsConfig.logistica
 
-  const emailHtml = await render(<LogisticaEmail data={body} />)
-
   const { data, error } = await resend.emails.send({
     from: FROM_EMAIL,
     to: config.toEmail,
     subject: config.subject,
-    html: emailHtml,
+    react: <LogisticaEmail data={body} />,
   })
 
   if (error) {
